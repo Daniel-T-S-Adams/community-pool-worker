@@ -21,8 +21,7 @@ Members implement internal transport, scheduling, recovery and output aggregatio
 The pool's [member master contract](https://github.com/Daniel-T-S-Adams/community-pool/blob/main/docs/MEMBER_MASTER.md)
 specifies that integration. Paired pool tests exercise a simulated master
 combining helper outputs, recovering missing work after restart, and submitting
-one complete result and sampled proofs. SSH transport and recovery passed
-local tests and a real two-server rehearsal.
+one complete result and sampled proofs.
 
 Every helper used for an assignment must match its verification compute type
 and compatible architecture, algorithm binary and runtime. A custom master may
@@ -133,11 +132,11 @@ restart recovery, preserved evidence, runtime isolation and a recorded public
 TIG proof. The pool repository also runs this worker against its actual API
 using simulated TIG responses and a simulated compute runtime.
 
-Unpaid and paid CPU benchmarks have completed on mainnet with the official
-pinned runtimes, on a single machine and on a master with one SSH helper.
 The runner computes all missing nonces inside one `step()` before checking
 the pool again; its per-nonce timeout is not a whole-benchmark deadline or a
 capacity guarantee. Measure the selected workload against the challenge
-lifetime again whenever the algorithm, workload or hardware changes. GPU
-execution is being validated separately; interruption during live compute and
-evidence retention through settlement remain open checks.
+lifetime again whenever the algorithm, workload or hardware changes. What has
+been exercised on mainnet and the open checks, including GPU execution,
+interruption during live compute and evidence retention through settlement,
+are listed in the pool repository's
+[ROADMAP.md](https://github.com/Daniel-T-S-Adams/community-pool/blob/main/docs/ROADMAP.md).

@@ -45,10 +45,10 @@ SSH fleet through real subprocess pipes, and resource limits. Runtime and
 network operations are mocked: the tests do not contact a live pool or start
 challenge containers.
 
-## Validation so far
+## Validation
 
-Unpaid and paid CPU benchmarks have completed on mainnet with the official
-pinned runtimes, on a single machine and on a master with one SSH helper,
-including deliberate disconnect and restart recovery. Challenge viability
-depends on the algorithm, workload and hardware and must be measured again
-when any of them changes. GPU execution is being validated separately.
+What has been exercised on real hosts and on mainnet, and what remains open,
+is recorded in the pool repository's
+[ROADMAP.md](https://github.com/Daniel-T-S-Adams/community-pool/blob/main/docs/ROADMAP.md).
+Challenge viability depends on the algorithm, workload and hardware and must
+be measured again when any of them changes.
