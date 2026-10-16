@@ -1,4 +1,4 @@
-# Installing and updating a pinned v2 worker
+# Installing and updating a pinned worker
 
 The pool serves a checked installer for the exact worker commit named in its
 paired release. Installation starts from the pool's Join page.
@@ -12,7 +12,7 @@ release. Save that file locally before running it.
 
 ```sh
 python3 install_worker_v2.py install \
-  --pool https://your-v2-pool.example \
+  --pool https://pool.example \
   --directory "$HOME/innopool-v2-member" \
   --resource CPU --compute-type aws_c7a --workers 4
 "$HOME/innopool-v2-member/run"
@@ -34,11 +34,11 @@ file outside Git checkouts and is passed only to the worker process. Never
 provide a member wallet private key or the pool's TIG API key.
 
 The installer verifies the pool's API version, whole-benchmark assignment unit,
-release digest and pool commit. The manifest must name the user's worker fork,
+release digest and pool commit. The manifest must name the expected worker repository,
 a full worker commit, a tag resolving to that commit, compatible evidence
 format, and official challenge images pinned by digest. A moving branch is not
 an installation target. An existing destination is refused unless an explicit
-update verifies its v2 ownership marker and checkout identity.
+update verifies its ownership marker and checkout identity.
 
 Each installation has its own private directory:
 
@@ -84,10 +84,10 @@ be retried with `update`; a partially activated configuration fails closed and
 the explicit retry completes activation. It never falls back to an upstream
 reset or deletes evidence to make an upgrade proceed.
 
-The fork's `scripts/start-fresh.sh /absolute/installation/directory` now invokes
-this pinned launcher. It has no image-pull, Git-update, container-recreation or
+`scripts/start-fresh.sh /absolute/installation/directory` invokes this pinned
+launcher. It has no image-pull, Git-update, container-recreation or
 system-service installation behavior. Give any locally configured supervisor
-its own `innopool-v2-*` service name and use restart-on-failure, so a successful
+its own service name and use restart-on-failure, so a successful
 drain stays stopped. Service installation remains an explicit member action.
 
 ## Release metadata contract
