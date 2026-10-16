@@ -110,7 +110,7 @@ Keep the master assignment and complete outputs through collateral settlement
 and any pending evidence requests. Helper caches also remain present; this
 implementation does not guess a finalization date and delete evidence.
 
-## Verification state
+## Tests
 
 Local tests cover local/helper aggregation, exact whole-benchmark proofs,
 disconnection and master restart, cached helper output, assignment/architecture
@@ -118,12 +118,7 @@ checks, strict SSH configuration, and concurrent request/response matching
 through real subprocess pipes. Computation and the SSH executable in those
 tests are simulated.
 
-A real two-server rehearsal on two ARM64 hosts, six local workers plus six SSH
-helper workers with the same pinned source and images, completed a 200-nonce
-knapsack assignment and three sampled proofs in about fifteen minutes,
-including a deliberate helper disconnect, a master kill and a restart; every
-saved output survived unchanged and was reused without recomputation. Paid
-mainnet benchmarks have since completed on a master with one helper. The
-configured verification compute type does not certify a physical cloud
-instance type. Timely execution of every challenge, GPU validation and reward
-settlement are measured separately.
+The configured verification compute type does not certify a physical cloud
+instance type. What this mode has completed on real hosts and on mainnet, and
+what remains open, is recorded in the pool repository's
+[ROADMAP.md](https://github.com/Daniel-T-S-Adams/community-pool/blob/main/docs/ROADMAP.md).
