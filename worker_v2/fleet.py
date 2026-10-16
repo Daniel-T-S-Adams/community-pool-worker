@@ -1,10 +1,13 @@
 """A member master combines local compute and explicitly configured SSH helpers."""
 
+import logging
 from queue import Empty, Queue
 from threading import Lock
 
 from .ssh_transport import HelperError, SSHTransport, check_hello
 from .state import StateError
+
+log = logging.getLogger("innopool-v2-worker")
 
 
 class RemoteRuntime:
@@ -101,12 +104,13 @@ class FleetRuntime:
             raise StateError("fleet differs from the saved assignment's compute type")
         saved = self.store.assignment(assignment["benchmark_id"])
         handed_over = saved["acknowledged_at"]
-        for remote in self.remotes:
+        for number, remote in enumerate(self.remotes, 1):
             try:
                 remote.validate(assignment, saved, offer)
-            except HelperError:
+            except HelperError as error:
                 if not handed_over:
                     raise
+                log.warning("helper %d cannot take benchmark %s after handover: %s", number, assignment["benchmark_id"], error)
 
     def prepare(self, assignment):
         saved = self.store.assignment(assignment["benchmark_id"])
@@ -128,6 +132,8 @@ class FleetRuntime:
             except Exception as error:
                 self.available[index] = False
                 errors.append(error)
+                log.warning("%s is unavailable for benchmark %s: %s", "local compute" if backend is self.local else "helper %d" % index,
+                            assignment["benchmark_id"], error)
         if not any(self.available.values()):
             raise HelperError("no compatible member compute is available") from errors[-1]
 
@@ -148,9 +154,10 @@ class FleetRuntime:
             with self.lock:
                 self.completed[index] = self.completed.get(index, 0) + 1
             return result
-        except HelperError:
+        except HelperError as error:
             with self.lock:
                 self.available[index] = False
+            log.warning("helper %d dropped out during nonce %s of benchmark %s: %s", index, nonce, assignment["benchmark_id"], error)
             raise
         finally:
             with self.lock:

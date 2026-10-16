@@ -90,6 +90,20 @@ class FleetTests(unittest.TestCase):
         self.assertEqual(self.local.released, 1)
         self.assertEqual(self.remote.released, 1)
 
+    def test_helper_failure_after_handover_is_logged_and_work_continues_locally(self):
+        value = assignment()
+        value["num_nonces"] = 6
+        pool = FakePool(value)
+        def refuse(*args, **kwargs):
+            raise HelperError("confirmed handover timestamp changed")
+        self.remote.prepare = refuse
+        with self.assertLogs("innopool-v2-worker", level="WARNING") as logged:
+            self.assertEqual(self.runner(pool).step(), "awaiting_verification")
+        self.assertTrue(any("helper 1 is unavailable for benchmark" in line and "handover timestamp changed" in line
+                            for line in logged.output), logged.output)
+        self.assertEqual(sorted(self.local.computed), list(range(6)))
+        self.assertEqual(self.remote.computed, [])
+
     def test_unavailable_helper_prevents_new_offer_before_capacity_is_promised(self):
         self.remote.disconnected = True
         pool = FakePool(assignment())
