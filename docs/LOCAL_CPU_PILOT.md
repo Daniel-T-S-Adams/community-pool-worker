@@ -1,6 +1,6 @@
 # CPU-only pilot on a shared machine
 
-This initial pilot uses one existing Linux host and one member worker at a
+This pilot uses one Linux host and one member worker at a
 time. Member A and Member B take turns with separate installations and saved
 evidence. GPU execution and testing on separate machines remain later checks.
 These resource controls do not publish a paired release, deploy a pool, fund
@@ -56,7 +56,7 @@ Do not stop the slice while work or observers are running.
 
 Follow
 [the installer procedure](INSTALL_V2.md) into separate private directories, for
-example `/var/lib/innopool-v2-pilot/member-a` and `member-b`. Offer CPU only with
+example `/var/lib/community-pool-pilot/member-a` and `member-b`. Offer CPU only with
 `--workers 1` and a verification type compatible with the machine's architecture.
 On an ARM64 host use a supported ARM verification type; AMD64 and GPU
 types are unsuitable there.
@@ -85,8 +85,8 @@ Containers belonging to another installation are never removed.
 From the tested worker checkout, as the host operator:
 
 ```sh
-python3 tools/run_cpu_pilot.py /var/lib/innopool-v2-pilot/member-a --check
-python3 tools/run_cpu_pilot.py /var/lib/innopool-v2-pilot/member-a
+python3 tools/run_cpu_pilot.py /var/lib/community-pool-pilot/member-a --check
+python3 tools/run_cpu_pilot.py /var/lib/community-pool-pilot/member-a
 ```
 
 The launcher verifies the shared budget and worker configuration, selects the
@@ -102,8 +102,8 @@ To finish existing work before switching to Member B, request a drain using
 the downloaded installer and wait for the service to exit successfully:
 
 ```sh
-python3 install_worker_v2.py drain --directory /var/lib/innopool-v2-pilot/member-a
-python3 tools/run_cpu_pilot.py /var/lib/innopool-v2-pilot/member-b
+python3 install_worker_v2.py drain --directory /var/lib/community-pool-pilot/member-a
+python3 tools/run_cpu_pilot.py /var/lib/community-pool-pilot/member-b
 ```
 
 After a crash, restart the same installation with the launcher's `--drain` flag

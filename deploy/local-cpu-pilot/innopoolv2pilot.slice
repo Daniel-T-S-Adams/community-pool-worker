@@ -1,6 +1,6 @@
-# Shared budget for this host's isolated v2 pilot, including Docker runtimes.
+# Shared budget for this host's bounded CPU pilot, including Docker runtimes.
 [Unit]
-Description=InnoPool v2 local CPU pilot resource budget
+Description=Community Pool local CPU pilot resource budget
 
 [Slice]
 CPUAccounting=yes

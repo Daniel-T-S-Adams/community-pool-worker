@@ -48,7 +48,7 @@ The master keeps its ordinary worker configuration and adds:
     "python": "/opt/member-helper/venv/bin/python",
     "code_directory": "/opt/member-helper/code",
     "config": "/opt/member-helper/helper.json",
-    "slice": "innopoolmemberhelper.slice",
+    "slice": "community-pool-helper.slice",
     "workers": 2
   }]
 }
@@ -76,7 +76,7 @@ The helper configuration is:
     "cpu_millis": 2000,
     "memory_mib": 4096,
     "pids_limit": 256,
-    "cgroup_parent": "innopoolmemberhelper.slice"
+    "cgroup_parent": "community-pool-helper.slice"
   }
 }
 ```

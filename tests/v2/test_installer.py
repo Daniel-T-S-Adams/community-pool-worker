@@ -184,7 +184,7 @@ print('fixture-revision='''+name+'''')
         changed_caps={**caps,'release_digest':hashlib.sha256(installer.canonical(changed).encode()).hexdigest()}
         with patch.object(installer,'fetch',side_effect=[changed_caps,changed]),self.assertRaisesRegex(installer.InstallError,'current installer'):
             installer.release_from_pool('https://pool.example')
-        wrong=deepcopy(manifest);wrong['worker']['repository']='https://github.com/rootztigmod/innopool-slave.git'
+        wrong=deepcopy(manifest);wrong['worker']['repository']='https://github.com/example/other-worker.git'
         with self.assertRaises(installer.InstallError):installer.validate_manifest(wrong)
         wrong=deepcopy(manifest);wrong['runtime_images']['c001']='example:latest'
         with self.assertRaises(installer.InstallError):installer.validate_manifest(wrong)

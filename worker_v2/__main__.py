@@ -1,4 +1,4 @@
-"""Run a pinned v2 worker without updating code or touching other services."""
+"""Run a pinned worker without updating code or touching other services."""
 
 import argparse
 import fcntl

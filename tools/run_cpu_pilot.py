@@ -46,7 +46,7 @@ def check_headroom(directory, remaining_memory, *, meminfo=Path("/proc/meminfo")
 def check_worker(directory):
     record = json.loads((directory / "installation-v2.json").read_text())
     if record.get("kind") != "innopool-v2-worker" or record.get("directory") != str(directory):
-        raise StateError("use an owned, pinned v2 worker installation")
+        raise StateError("use an owned, pinned worker installation")
     config = json.loads((directory / "worker.json").read_text())
     if config.get("resource") != "CPU" or type(config.get("workers")) is not int or config["workers"] != 1:
         raise StateError("local pilot requires CPU only and workers=1")
