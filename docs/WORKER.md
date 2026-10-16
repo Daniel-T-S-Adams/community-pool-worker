@@ -12,13 +12,13 @@ two-slot limit for each member across CPU and GPU requests.
 
 ## Member-managed masters
 
-Members may use the [SSH member master mode](SSH_MEMBER_MASTER_V2.md), or replace
+Members may use the [SSH member master mode](SSH_MEMBER_MASTER.md), or replace
 this client with their own master, to distribute nonce computation across
 compatible machines. The master uses the same
 API 2.0 work request, assignment, acknowledgement, complete result and proof
 routes. It remains responsible for the whole benchmark after confirmed handover.
 Members implement internal transport, scheduling, recovery and output aggregation.
-The pool's [member master contract](https://github.com/Daniel-T-S-Adams/community-pool/blob/main/docs/MEMBER_MASTER_V2.md)
+The pool's [member master contract](https://github.com/Daniel-T-S-Adams/community-pool/blob/main/docs/MEMBER_MASTER.md)
 specifies that integration. Paired pool tests exercise a simulated master
 combining helper outputs, recovering missing work after restart, and submitting
 one complete result and sampled proofs. SSH transport and recovery passed
@@ -65,7 +65,7 @@ The runner streams saved solutions, bounds concurrent computations and resumes
 only missing nonces. `--drain` finishes existing work without requesting more.
 No startup path pulls Git changes, resets configuration or deletes old evidence.
 A durable `data/drain.request` also requests draining from a running process.
-The [pinned installer](INSTALL_V2.md) preserves the data directory and refuses
+The [pinned installer](INSTALL.md) preserves the data directory and refuses
 an update until the worker has stopped and saved requests are complete.
 
 ## Development configuration

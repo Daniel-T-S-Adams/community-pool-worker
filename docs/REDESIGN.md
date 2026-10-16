@@ -1,8 +1,8 @@
 # Community Pool worker development
 
 The worker implements the whole-benchmark member protocol in the `worker_v2`
-package. See [the worker guide](WORKER_V2.md) for behavior, configuration and
-validation limits, and [installation](INSTALL_V2.md) for how members install a
+package. See [the worker guide](WORKER.md) for behavior, configuration and
+validation limits, and [installation](INSTALL.md) for how members install a
 pinned release.
 
 ## Package layout

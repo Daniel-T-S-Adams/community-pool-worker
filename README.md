@@ -7,9 +7,9 @@ durable evidence of every output, and returns the complete result and the
 sampled proofs through the pool's member API. It can also act as a member
 master that spreads one benchmark across compatible machines over SSH.
 
-- [Worker behavior and configuration](docs/WORKER_V2.md)
-- [Install, drain and update a pinned worker](docs/INSTALL_V2.md)
-- [Configure a member master and SSH helpers](docs/SSH_MEMBER_MASTER_V2.md)
+- [Worker behavior and configuration](docs/WORKER.md)
+- [Install, drain and update a pinned worker](docs/INSTALL.md)
+- [Configure a member master and SSH helpers](docs/SSH_MEMBER_MASTER.md)
 - [Run one bounded worker on a shared machine](docs/LOCAL_CPU_PILOT.md)
 - [Development notes](docs/REDESIGN.md)
 

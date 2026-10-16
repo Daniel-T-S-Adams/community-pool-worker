@@ -55,7 +55,7 @@ Do not stop the slice while work or observers are running.
 ## Prepare each worker
 
 Follow
-[the installer procedure](INSTALL_V2.md) into separate private directories, for
+[the installer procedure](INSTALL.md) into separate private directories, for
 example `/var/lib/community-pool-pilot/member-a` and `member-b`. Offer CPU only with
 `--workers 1` and a verification type compatible with the machine's architecture.
 On an ARM64 host use a supported ARM verification type; AMD64 and GPU
